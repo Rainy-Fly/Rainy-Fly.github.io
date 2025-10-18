@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>弗梢的博客</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 实时时间显示 -->
+    <div class="time-display"></div>
+
+    <!-- 动态渐变背景 -->
+    <div class="bg-gradient"></div>
+
+    <!-- 水滴艺术组件 -->
+    <div class="water-drop"></div>
+    <div class="water-drop water-drop2"></div>
+    <div class="water-drop water-drop3"></div>
+    <div class="water-drop water-drop4"></div>
+    <div class="water-drop water-drop5"></div>
+
+    <!-- 动态光线条效果 -->
+    <div class="light-curves">
+        <svg width="100%" height="100%" viewBox="0 0 1400 800" preserveAspectRatio="xMidYMid slice">
+            <!-- 曲线1 -->
+            <path d="M0,400 Q350,200 700,400 T1400,400" class="light-curve curve-1" />
+            <!-- 曲线2 -->
+            <path d="M0,200 Q350,400 700,200 T1400,200" class="light-curve curve-2" />
+            <!-- 曲线3 -->
+            <path d="M0,600 Q350,400 700,600 T1400,600" class="light-curve curve-3" />
+        </svg>
+    </div>
+
+    <div class="container">
+        <!-- 左侧边栏 -->
+        <aside class="sidebar left-sidebar">
+            <h3 class="sidebar-title">装饰贴纸</h3>
+            <div class="sticker-container">
+                <img src="images/nn.jpeg" alt="装饰贴纸1" class="sticker">
+                <img src="images/lxh.jpeg" alt="装饰贴纸2" class="sticker">
+                <img src="images/Elaina.jpeg" alt="装饰贴纸3" class="sticker">
+            </div>
+        </aside>
+
+        <!-- 主内容区 -->
+        <main class="main-content">
+            <!-- 个人信息区域 -->
+            <div class="personal-card">
+                <div class="avatar-container">
+                    <img src="images/avatar.jpg" alt="个人头像" class="avatar">
+                </div>
+                <h1 class="name">弗梢</h1>
+                <p class="signature">树影微斜芳草上,江安汩汩初还春</p><br>
+                <p class="field">机器学习  |  C++  |  C#</p>
+                <div class="profile-intro"><br>
+                <p>热爱编程，从今年(2025)暑假买到电脑后从零开始接触编程,用VisualStudio尝试了C++的一些基础语法,同时捣鼓Unity游戏引擎,虽然都还没有做出什么东西来,但始终在码不停蹄,无论是从hello world写到几百行代码,还是一步步消除bug,都能享受其中乐趣(配环境除外)</p>
+            </div>
+
+            <!-- 文章导航栏 -->
+            <nav class="article-nav">
+                <h2 class="nav-title">文章导航</h2>
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="articals.html" class="nav-link arti-animated">机器学习</a></li>
+                    <li class="nav-item"><a href="articals.html" class="nav-link arti-animated">C++</a></li>
+                    <li class="nav-item"><a href="articals.html" class="nav-link arti-animated">C#</a></li>
+                    <li class="nav-item"><a href="articals.html" class="nav-link arti-animated">随笔小记</a></li>
+                </ul>
+            </nav>
+
+            <!-- 其他账号跳转区 -->
+            <div class="account-links">
+                <h2 class="links-title">我的账号</h2>
+                <h3 class="links-subtitle">my accounts</h3><br>
+                <div class="links-container">
+                    <a href="https://github.com/Rainy-Fly/Jotang2025" class="account-btn act-animated">GitHub(直达Jotang2025招新作业)</a>
+                    <a href="#" class="account-btn act-animated">Bilibili</a>
+                    <a href="93219899" class="account-btn act-animated">QQ</a>
+                    <a href="#" class="account-btn act-animated">知乎</a>
+                </div>
+            </div>
+        </main>
+
+        <!-- 右侧边栏 -->
+        <aside class="sidebar right-sidebar">
+            <h3 class="sidebar-title">推荐内容</h3>
+            
+            <!-- 动画卡片组件 -->
+            <div class="animate-card-81">
+                <div class="animate-card">
+                    <div class="animate-card__layer">
+                        <img src="images/transformer.png" alt="卡片图片1">
+                    </div>
+                    <div class="animate-card__sublayer">
+                        <h4>机器学习前沿领域</h4>
+                        <p>变形金刚(误)--transfoemr的模型架构</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="animate-card-81" style="margin-top: 20px;">
+                <div class="animate-card">
+                    <div class="animate-card__layer">
+                        <img src="images/cpp.png" alt="卡片图片2">
+                    </div>
+                    <div class="animate-card__sublayer">
+                        <h4>一起来学C++吧</h4>
+                        <p>类与多态,匿名函数,模板,高质量随机数，重载运算符线程与进程,互斥锁,原子操作</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="animate-card-81" style="margin-top: 20px;">
+                <div class="animate-card">
+                    <div class="animate-card__layer">
+                        <img src="images/csharp.png" alt="独立游戏开发">
+                    </div>
+                    <div class="animate-card__sublayer">
+                        <h4>独立游戏开发</h4>
+                        <p>RustedWarfare-like 2D RTS games</p>
+                    </div>
+                </div>
+            </div>
+
+    <script>
+        // 实时时间显示功能
+        function updateTime() {
+            const now = new Date();
+            const beijingTime = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Shanghai' }));
+            
+            const year = beijingTime.getFullYear();
+            const month = beijingTime.getMonth() + 1;
+            const day = beijingTime.getDate();
+            const hours = String(beijingTime.getHours()).padStart(2, '0');
+            const minutes = String(beijingTime.getMinutes()).padStart(2, '0');
+            
+            const timeString = `${year}年${month}月${day}日 ${hours}:${minutes}`;
+            document.querySelector('.time-display').textContent = timeString;
+        }
+        
+        updateTime();
+        setInterval(updateTime, 60000);
+    </script>
+</body>
+</html>

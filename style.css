@@ -1,0 +1,570 @@
+/* 全局样式重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Microsoft YaHei", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    border-radius: 5px;
+}
+
+body {
+    position: relative;
+    min-height: 100vh;
+    overflow-x: hidden;
+    padding: 80px 20px 50px;
+}
+
+/* 实时时间显示 */
+.time-display {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fff;
+    font-size: 18px;
+    padding: 8px 16px;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 100;
+    backdrop-filter: blur(5px);
+}
+
+/* 1. 浅蓝色渐变背景（修正部分） */
+.bg-gradient {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #e0f7ff, #b3e5fc, #81d4fa); /* 浅蓝色渐变 */
+    background-size: 300% 300%;
+    animation: gradientMove 15s ease infinite;
+    z-index: -1;
+}
+
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* 2. 水滴动画（修正部分，确保可见） */
+.water-drop {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background: rgba(100, 181, 246, 0.7); /* 蓝色水滴，与浅蓝背景对比 */
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    transform: rotate(-45deg);
+    box-shadow: 
+        0 4px 12px rgba(255, 255, 255, 0.8) inset, /* 内部高光 */
+        0 6px 15px rgba(0, 116, 217, 0.2); /* 外部阴影 */
+    animation: dropFloat 6s ease-in-out infinite;
+    z-index: 0; /* 中层：在背景之上，内容之下 */
+    pointer-events: none; /* 不影响点击 */
+}
+
+/* 水滴位置分布（避免遮挡内容） */
+/* 水滴位置分布（调整为中间区域） */
+.water-drop { top: 15%; left: 30%; } /* 左侧中间 */
+.water-drop2 {
+    width: 50px; height: 50px;
+    top: 40%; left: 60%; /* 右侧中间 */
+    animation: dropFloat 8s ease-in-out infinite 1s;
+}
+.water-drop3 {
+    width: 65px; height: 65px;
+    top: 70%; left: 40%; /* 左侧中间偏右 */
+    animation: dropFloat 10s ease-in-out infinite 2s;
+}
+.water-drop4 {
+    width: 40px; height: 40px;
+    top: 20%; left: 50%; /* 中间偏上 */
+    animation: dropFloat 2s ease-in-out infinite 0.5s;
+}
+.water-drop5 {
+    width: 70px; height: 70px;
+    top: 85%; left: 65%; /* 右侧中下 */
+    animation: dropFloat 5s ease-in-out infinite 1.5s;
+}
+
+/* 水滴浮动动画（更明显的轨迹） */
+@keyframes dropFloat {
+    0% { transform: rotate(-45deg) translate(20px, 20px); opacity: 0.7; }
+    25% { transform: rotate(-45deg) translate(15px, -15px); opacity: 0.9; }
+    50% { transform: rotate(-45deg) translate(30px, 0); opacity: 0.8; }
+    75% { transform: rotate(-45deg) translate(15px, 15px); opacity: 0.9; }
+    100% { transform: rotate(-45deg) translate(30px, 30px); opacity: 0.7; }
+}
+
+/* 容器布局（保持原有） */
+.container {
+    display: flex;
+    gap: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 10; /* 确保内容在水滴之上 */
+}
+
+/* 侧边栏样式（修改部分） */
+.sidebar {
+    width: 250px;
+    flex-shrink: 0;
+    /* 关键修改：设置固定高度和滚动条 */
+    max-height: calc(100vh - 130px); /* 视口高度减去顶部和底部留白 */
+    overflow-y: auto; /* 内容超出时显示垂直滚动条 */
+    position: sticky; /* 相对视口固定定位 */
+    top: 100px; /* 距离顶部的距离 */
+    padding-right: 10px; /* 避免滚动条与内容重叠 */
+}
+
+/* 优化滚动条样式 */
+.sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.left-sidebar, .right-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.sidebar-title {
+    color: #fff;
+    text-align: center;
+    margin-bottom: 15px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.sticker-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.sticker {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.sticker:hover {
+    transform: scale(1.05);
+}
+
+/* 主内容区（保持原有） */
+.main-content {
+    flex-grow: 1;
+}
+
+/* 个人信息区域（保持原有） */
+.personal-card {
+    text-align: center;
+    margin-bottom: 60px;
+    transition: transform 0.5s ease;
+}
+
+.personal-card:hover {
+    transform: scale(1.03);
+}
+
+.avatar-container {
+    width: 180px;
+    height: 180px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.5s ease, transform 0.5s ease;
+}
+
+.avatar-container:hover {
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+    transform: rotate(5deg);
+}
+
+.avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.name {
+    font-size: 32px;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    margin-bottom: 10px;
+    transition: font-size 0.5s ease;
+}
+
+.name:hover {
+    font-size: 35px;
+}
+
+.signature {
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.9);
+    letter-spacing: 2px;
+    transition: color 0.5s ease;
+}
+
+.signature:hover {
+    color: #fff;
+}
+
+/* 文章导航栏（保持原有） */
+.article-nav {
+    max-width: 800px;
+    margin: 0 auto 60px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    transition: background 0.5s ease;
+}
+
+.article-nav:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.nav-title {
+    font-size: 24px;
+    color: #fff;
+    margin-bottom: 20px;
+    text-align: center;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.nav-list {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.nav-item {
+    margin: 10px;
+}
+
+/* 按钮样式（保持原有紫色效果） */
+.arti-animated {
+    padding: 20px;
+    background-image: linear-gradient(135deg, #f3f8f9 10%, #5d3fd3);
+    border-radius: 5px;
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px rgba(247, 246, 246, 0.3), 0 4px 8px rgba(249, 248, 248, 0.2);
+    border: none;
+    cursor: pointer;
+    text-align: center;
+}
+
+.act-animated {
+    padding: 20px;
+    background-image: linear-gradient(135deg, #45b2e1 10%, #5d3fd3);
+    border-radius: 5px;
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3), 0 4px 8px rgba(0, 0, 0, 0.2);
+    border: none;
+    cursor: pointer;
+    text-align: center;
+}
+
+.arti-animated:hover {
+    background-image: linear-gradient(135deg, #5d3fd3 10%, #7b66ff);
+    transform: translateY(-3px);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5), 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.act-animated:hover {
+    background-image: linear-gradient(135deg, #e0b31e 10%, #351eca);
+    transform: translateY(-3px);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5), 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* 其他账号跳转区 */
+.account-links {
+    max-width: 800px;
+    margin: 0 auto;
+    background: rgba(246, 246, 246, 0.2);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(191, 246, 162, 0.1);
+    transition: transform 0.5s ease;
+}
+
+.account-links:hover {
+    transform: translateY(-5px);
+}
+
+.links-title {
+    font-size: 24px;
+    color: #fff;
+    margin-bottom: 20px;
+    text-align: center;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.links-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* 动画卡片组件（保持原有） */
+.animate-card-81 {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.animate-card-81::before, 
+.animate-card-81::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 26%;
+    height: 100%;
+    transform: scaleY(0);
+    opacity: 0;
+    transition: all 0.35s ease;
+    background-color: #fff;
+}
+
+.animate-card-81::before {
+    transition-delay: 0s;
+}
+
+.animate-card-81::after {
+    left: 25%;
+    transition-delay: 0.105s;
+}
+
+.animate-card {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.animate-card__layer {
+    width: 100%;
+    height: 100%;
+    transition: 0.5s;
+}
+
+.animate-card__layer > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.animate-card__sublayer {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    padding: 30px;
+    perspective: 50em;
+    text-align: center;
+    color: #000;
+    transition: 0.5s;
+    opacity: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.animate-card__sublayer::before, 
+.animate-card__sublayer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 26%;
+    height: 100%;
+    transform: scaleY(0);
+    transition: all 0.35s ease;
+    opacity: 0;
+    background-color: #fff;
+    z-index: -1;
+}
+
+.animate-card__sublayer::before {
+    left: 50%;
+    transition-delay: 0.21s;
+}
+
+.animate-card__sublayer::after {
+    left: 75%;
+    transition-delay: 0.35s;
+}
+
+.animate-card-81:hover::before, 
+.animate-card-81:hover::after {
+    transform: scaleY(1);
+    opacity: 0.7;
+}
+
+.animate-card-81:hover .animate-card__sublayer {
+    opacity: 1;
+}
+
+.animate-card-81:hover .animate-card__sublayer::before, 
+.animate-card-81:hover .animate-card__sublayer::after {
+    transform: scaleY(1);
+    opacity: 0.7;
+}
+
+/* 响应式调整（保持原有） */
+@media (max-width: 900px) {
+    .container {
+        flex-direction: column;
+    }
+    
+    .sidebar {
+        width: 100%;
+    }
+    
+    .sticker-container {
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .sticker {
+        width: 120px;
+        height: 120px;
+        object-fit: cover;
+    }
+}
+
+/* 动态光线条容器 */
+.light-curves {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5; /* 位于水滴之上，内容之下 */
+    opacity: 0.7;
+}
+
+/* 光线条基础样式 */
+.light-curve {
+    fill: none;
+    stroke-linecap: round;
+    stroke-width: 2;
+    filter: blur(1px);
+}
+
+/* 光线条颜色和动画 */
+.curve-1 {
+    stroke: rgba(255, 255, 255, 0.6);
+    animation: curveFlow 15s linear infinite;
+}
+
+.curve-2 {
+    stroke: rgba(179, 229, 252, 0.8);
+    animation: curveFlow 20s linear infinite reverse;
+}
+
+.curve-3 {
+    stroke: rgba(129, 212, 250, 0.7);
+    animation: curveFlow 18s linear infinite;
+}
+
+/* 光线流动动画 */
+@keyframes curveFlow {
+    0% {
+        stroke-dasharray: 100 300;
+        stroke-dashoffset: 0;
+        opacity: 0.5;
+    }
+    50% {
+        stroke-dasharray: 200 200;
+        opacity: 0.8;
+    }
+    100% {
+        stroke-dasharray: 100 300;
+        stroke-dashoffset: 800;
+        opacity: 0.5;
+    }
+}
+
+/* 曲线形状微动画 */
+.curve-1 {
+    animation: curveFlow 15s linear infinite, curveWiggle 8s ease-in-out infinite;
+}
+
+.curve-2 {
+    animation: curveFlow 20s linear infinite reverse, curveWiggle 10s ease-in-out infinite 1s;
+}
+
+.curve-3 {
+    animation: curveFlow 18s linear infinite, curveWiggle 12s ease-in-out infinite 2s;
+}
+
+@keyframes curveWiggle {
+    0%, 100% {
+        d: path("M0,400 Q350,200 700,400 T1400,400");
+    }
+    50% {
+        d: path("M0,400 Q350,300 700,400 T1400,400");
+    }
+}
+
+.curve-2 {
+    @keyframes curveWiggle {
+        0%, 100% {
+            d: path("M0,200 Q350,400 700,200 T1400,200");
+        }
+        50% {
+            d: path("M0,200 Q350,100 700,200 T1400,200");
+        }
+    }
+}
+
+.curve-3 {
+    @keyframes curveWiggle {
+        0%, 100% {
+            d: path("M0,600 Q350,400 700,600 T1400,600");
+        }
+        50% {
+            d: path("M0,600 Q350,500 700,600 T1400,600");
+        }
+    }
+}
